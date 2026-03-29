@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MYTYPINGPRO</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI';
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+#box {
+    width: 60%;
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+#text {
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+textarea {
+    width: 90%;
+    height: 120px;
+    border-radius: 12px;
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+}
+
+select, button {
+    margin: 10px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+}
+
+button {
+    background: #00ffcc;
+    color: black;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #00ffaa;
+    transform: scale(1.05);
+}
+
+#timer {
+    font-size: 28px;
+    color: #00ffcc;
+}
+
+#result {
+    margin-top: 15px;
+    font-size: 24px;
+    color: yellow;
+}
+</style>
+</head>
+
+<body>
+
+<div id="box">
+
+<h1>🚀 MYTYPINGPRO</h1>
+
+<p id="text">
+The quick brown fox jumps over the lazy dog. Practice daily to improve typing speed.
+</p>
+
+<h2 id="timer">Time: 0</h2>
+
+<select id="timeSelect">
+    <option value="30">30 Seconds</option>
+    <option value="60">60 Seconds</option>
+</select>
+
+<br>
+
+<textarea id="input" placeholder="Start typing..." oninput="startTest()"></textarea>
+
+<br>
+
+<button onclick="resetTest()">Reset</button>
+
+<h2 id="result"></h2>
+
+</div>
+
+<script>
+let time = 0;
+let running = false;
+let interval;
+
+function startTest() {
+    if (!running) {
+        running = true;
+        time = document.getElementById("timeSelect").value;
+
+        interval = setInterval(() => {
+            time--;
+            document.getElementById("timer").innerHTML = "Time: " + time;
+
+            if (time <= 0) {
+                clearInterval(interval);
+                endTest();
+            }
+        }, 1000);
+    }
+}
+
+function endTest() {
+    let text = document.getElementById("input").value;
+    let words = text.trim().split(" ").length;
+    let speed = Math.round((words / document.getElementById("timeSelect").value) * 60);
+
+    document.getElementById("result").innerHTML =
+        "⚡ Speed: " + speed + " WPM";
+}
+
+function resetTest() {
+    clearInterval(interval);
+    document.getElementById("input").value = "";
+    document.getElementById("result").innerHTML = "";
+    document.getElementById("timer").innerHTML = "Time: 0";
+    running = false;
+}
+</script>
+
+</body>
+</html>
+</body>
+</html>
